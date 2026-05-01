@@ -74,21 +74,19 @@ python -m pytest -q -o addopts='' tests/test_cursor_harness_provider.py
 
 1. Create the public GitHub repository.
 2. Push this package as `hermes-cursor-harness`.
-3. Enable GitHub Actions by moving `.github/workflows-disabled/*.yml` into
-   `.github/workflows/` from a token with GitHub `workflow` scope.
-4. Add GitHub Actions secrets:
+3. Add GitHub Actions secrets:
    - `CURSOR_API_KEY` for the private compatibility lane.
    - `CURSOR_AGENT_INSTALL_COMMAND` only if the runner needs a Cursor CLI install.
    - `PYPI_API_TOKEN` if publishing from CI.
-5. Run public CI and private Cursor compatibility CI.
-6. Tag `v0.1.0`.
-7. Publish the package:
+4. Run public CI and private Cursor compatibility CI.
+5. Tag `v0.1.0`.
+6. Publish the package:
 
 ```bash
 python -m twine upload dist/*
 ```
 
-8. Attach:
+7. Attach:
    - `dist/hermes_cursor_harness-0.1.0.tar.gz`
    - `dist/hermes_cursor_harness-0.1.0-py3-none-any.whl`
    - `~/.hermes/cursor_harness/compatibility_matrix.json`

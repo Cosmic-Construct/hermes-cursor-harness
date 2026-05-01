@@ -120,11 +120,10 @@ The full UI contract and sample payload live in:
 ## Compatibility CI
 
 Public CI uses fake Cursor transports for deterministic compile, unit, config,
-and quick-smoke coverage. Workflow templates live in
-`.github/workflows-disabled/` until a maintainer with GitHub `workflow` OAuth
-scope moves them into `.github/workflows/`. The private compatibility lane
-requires `CURSOR_API_KEY`, can use `CURSOR_AGENT_INSTALL_COMMAND` to install a
-real Cursor CLI, and uploads the generated compatibility matrix artifact.
+and quick-smoke coverage. The private compatibility lane in
+`.github/workflows/cursor-compatibility.yml` requires `CURSOR_API_KEY`, can use
+`CURSOR_AGENT_INSTALL_COMMAND` to install a real Cursor CLI, and uploads the
+generated compatibility matrix artifact.
 
 ## Upstream Provider Route
 

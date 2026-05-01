@@ -517,9 +517,7 @@ Use cursor_harness_compatibility with action=run, level=real, project=my-app.
 ```
 
 Private CI can run the real Cursor SDK lane with `CURSOR_API_KEY` and optional
-`CURSOR_AGENT_INSTALL_COMMAND` secrets. Workflow templates live under
-`.github/workflows-disabled/` until a maintainer enables GitHub's `workflow`
-OAuth scope and moves them into `.github/workflows/`.
+`CURSOR_AGENT_INSTALL_COMMAND` secrets through `.github/workflows/cursor-compatibility.yml`.
 
 Manage sessions:
 
@@ -549,8 +547,8 @@ and release notes:
 - `MANIFEST.in`
 - `CHANGELOG.md`
 - `LICENSE`
-- `.github/workflows-disabled/ci.yml`
-- `.github/workflows-disabled/cursor-compatibility.yml`
+- `.github/workflows/ci.yml`
+- `.github/workflows/cursor-compatibility.yml`
 - `docs/RELEASE.md`
 - `docs/DEMO.md`
 - `docs/DISTRIBUTION.md`
