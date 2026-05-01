@@ -14,6 +14,7 @@ from pathlib import Path
 from collections.abc import Callable
 from typing import Any
 
+from .child_env import cursor_child_env
 from .config import HarnessConfig, resolve_stream_command
 from .events import event, modified_files_from_events, normalize_stream_json
 from .store import HarnessStore, SessionRecord
@@ -45,6 +46,7 @@ def run_stream_turn(
         "encoding": "utf-8",
         "errors": "replace",
         "bufsize": 1,
+        "env": cursor_child_env(include_test_controls=True),
     }
     if sys.platform == "win32":
         popen_kwargs["creationflags"] = getattr(subprocess, "CREATE_NO_WINDOW", 0)

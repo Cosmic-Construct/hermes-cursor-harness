@@ -130,7 +130,7 @@ def _write_plugin_skeleton(target: Path, *, force: bool) -> list[Path]:
             {
                 "name": "hermes-harness",
                 "displayName": "Hermes Harness",
-                "version": "0.1.0",
+                "version": "0.1.1",
                 "description": "Cursor-side companion for Hermes Cursor Harness.",
                 "rules": ["rules/hermes-harness.mdc"],
                 "skills": ["skills/hermes-context.md"],

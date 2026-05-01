@@ -5,6 +5,7 @@ from __future__ import annotations
 import subprocess
 from typing import Any
 
+from .child_env import cursor_child_env
 from .config import HarnessConfig, resolve_stream_command
 from .sdk_runner import sdk_catalog_action
 
@@ -36,6 +37,7 @@ def list_cursor_models(cfg: HarnessConfig, timeout_sec: float = 45.0) -> dict[st
             stderr=subprocess.PIPE,
             timeout=timeout_sec,
             check=False,
+            env=cursor_child_env(include_test_controls=True),
         )
     except subprocess.TimeoutExpired as exc:
         return {

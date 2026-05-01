@@ -13,6 +13,7 @@ import time
 from typing import Any, Callable
 
 from .approval import select_permission_option
+from .child_env import cursor_child_env
 from .config import HarnessConfig, resolve_acp_command
 from .events import event, modified_files_from_events, normalize_acp_update
 from .store import HarnessStore, SessionRecord
@@ -45,6 +46,7 @@ class AcpClient:
         self.trusted_readonly_mcp_tools = set(trusted_readonly_mcp_tools or [])
         self.approval_bridge_command = approval_bridge_command or []
         self.approval_bridge_timeout_sec = approval_bridge_timeout_sec
+        self.env = cursor_child_env(include_test_controls=True)
         self.proc: subprocess.Popen[str] | None = None
         self._ids = 0
         self._stdout_q: queue.Queue[str | None] = queue.Queue()
@@ -61,6 +63,7 @@ class AcpClient:
             "encoding": "utf-8",
             "errors": "replace",
             "bufsize": 1,
+            "env": self.env,
         }
         if sys.platform == "win32":
             popen_kwargs["creationflags"] = getattr(subprocess, "CREATE_NO_WINDOW", 0)
@@ -99,7 +102,7 @@ class AcpClient:
             {
                 "protocolVersion": 1,
                 "clientCapabilities": {"fs": {"readTextFile": False, "writeTextFile": False}, "terminal": False},
-                "clientInfo": {"name": "hermes-cursor-harness", "title": "Hermes Cursor Harness", "version": "0.1.0"},
+                "clientInfo": {"name": "hermes-cursor-harness", "title": "Hermes Cursor Harness", "version": "0.1.1"},
             },
             timeout_sec=timeout_sec,
         )

@@ -21,6 +21,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
+from .child_env import cursor_child_env
 from .config import HarnessConfig, resolve_sdk_command
 from .credentials import resolve_background_api_key
 from .events import event, modified_files_from_events, normalize_sdk_json
@@ -213,6 +214,7 @@ def ensure_sdk_package(cfg: HarnessConfig) -> Path:
         stderr=subprocess.PIPE,
         timeout=180,
         check=False,
+        env=cursor_child_env(include_cursor_credentials=False),
     )
     if proc.returncode != 0:
         detail = (proc.stderr or proc.stdout or "").strip()
@@ -281,13 +283,15 @@ def _sdk_payload(*, cfg: HarnessConfig, record: SessionRecord, prompt: str) -> d
 
 
 def _sdk_env(cfg: HarnessConfig) -> dict[str, str]:
-    env = os.environ.copy()
+    extra: dict[str, str] = {}
     node_modules = sdk_node_dir(cfg) / "node_modules"
     if node_modules.exists():
-        env["HERMES_CURSOR_HARNESS_SDK_NODE_MODULES"] = str(node_modules)
+        extra["HERMES_CURSOR_HARNESS_SDK_NODE_MODULES"] = str(node_modules)
     api_key = resolve_background_api_key()
-    if api_key and not env.get("CURSOR_API_KEY"):
+    env = cursor_child_env(extra=extra, include_test_controls=True)
+    if api_key:
         env["CURSOR_API_KEY"] = api_key
+        env["CURSOR_BACKGROUND_API_KEY"] = api_key
     return env
 
 

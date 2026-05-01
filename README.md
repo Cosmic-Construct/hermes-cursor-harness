@@ -176,6 +176,11 @@ Leave SDK sandboxing enabled by default. Set
 `HERMES_CURSOR_HARNESS_SDK_SANDBOX_ENABLED=false` only when the Cursor SDK
 reports that local sandboxing is unsupported in your environment.
 
+Cursor and approval-bridge subprocesses run with a scoped child environment.
+The harness forwards basic OS/runtime variables plus Cursor API credentials
+where needed, but does not inherit unrelated provider, Gateway, GitHub, or shell
+tokens from the Hermes process.
+
 Install and check the official Cursor SDK bridge:
 
 ```bash

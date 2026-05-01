@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1 - 2026-05-01
+
+- Scoped Cursor and approval-bridge subprocess environments so unrelated
+  provider, Gateway, GitHub, and shell tokens are not inherited by child
+  runtimes.
+- Added regression coverage for child environment filtering.
+
 ## 0.1.0 - 2026-05-01
 
 Initial public alpha of Hermes Cursor Harness.

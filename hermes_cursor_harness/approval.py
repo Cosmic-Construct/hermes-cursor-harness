@@ -6,6 +6,8 @@ import json
 import subprocess
 from typing import Any
 
+from .child_env import cursor_child_env
+
 
 def select_permission_option(
     *,
@@ -64,6 +66,7 @@ def _ask_bridge(
             stderr=subprocess.PIPE,
             timeout=bridge_timeout_sec,
             check=False,
+            env=cursor_child_env(include_cursor_credentials=False),
         )
     except Exception:
         return None

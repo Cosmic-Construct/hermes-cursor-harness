@@ -17,6 +17,7 @@ from .config import (
     resolve_sdk_command,
     resolve_stream_command,
 )
+from .child_env import cursor_child_env
 from .credentials import background_key_status
 from .security import apply_security_profile, available_security_profiles
 from .sdk_runner import sdk_node_dir, sdk_status
@@ -218,7 +219,15 @@ def _command_version(command: list[str]) -> dict[str, Any]:
     try:
         import subprocess
 
-        proc = subprocess.run(command, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10, check=False)
+        proc = subprocess.run(
+            command,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=10,
+            check=False,
+            env=cursor_child_env(include_test_controls=True),
+        )
         return {
             "returncode": proc.returncode,
             "stdout": proc.stdout.strip(),

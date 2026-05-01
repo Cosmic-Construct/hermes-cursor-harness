@@ -11,8 +11,9 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
-from .config import HarnessConfig, resolve_acp_command, resolve_sdk_command, resolve_stream_command
 from .approval_queue import list_approval_requests
+from .child_env import cursor_child_env
+from .config import HarnessConfig, resolve_acp_command, resolve_sdk_command, resolve_stream_command
 from .proposal_queue import list_cursor_proposals
 from .provider_route import validate_provider_route
 from .store import HarnessStore
@@ -81,6 +82,7 @@ def _cursor_versions(cfg: HarnessConfig) -> dict[str, Any]:
                 stderr=subprocess.PIPE,
                 timeout=10,
                 check=False,
+                env=cursor_child_env(include_test_controls=True),
             )
             result[name] = {"command": command, "returncode": proc.returncode, "stdout": proc.stdout.strip(), "stderr": proc.stderr.strip()}
         except Exception as exc:

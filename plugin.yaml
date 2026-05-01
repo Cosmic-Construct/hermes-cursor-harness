@@ -1,5 +1,5 @@
 name: hermes-cursor-harness
-version: "0.1.0"
+version: "0.1.1"
 description: Hermes-native Cursor harness with Cursor SDK-first execution, ACP fallback, and stream-json fallback.
 author: Hermes Cursor Harness contributors
 license: MIT

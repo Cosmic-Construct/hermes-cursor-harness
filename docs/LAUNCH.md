@@ -46,7 +46,7 @@ Agents API access.
 Run the Hermes-side gate:
 
 ```bash
-python -m pip install dist/hermes_cursor_harness-0.1.0-py3-none-any.whl
+python -m pip install dist/hermes_cursor_harness-0.1.1-py3-none-any.whl
 
 HERMES_HOME="$(mktemp -d)" python - <<'PY'
 from pathlib import Path
@@ -79,7 +79,7 @@ python -m pytest -q -o addopts='' tests/test_cursor_harness_provider.py
    - `CURSOR_AGENT_INSTALL_COMMAND` only if the runner needs a Cursor CLI install.
    - `PYPI_API_TOKEN` if publishing from CI.
 4. Run public CI and private Cursor compatibility CI.
-5. Tag `v0.1.0`.
+5. Tag `v0.1.1`.
 6. Publish the package:
 
 ```bash
@@ -87,8 +87,8 @@ python -m twine upload dist/*
 ```
 
 7. Attach:
-   - `dist/hermes_cursor_harness-0.1.0.tar.gz`
-   - `dist/hermes_cursor_harness-0.1.0-py3-none-any.whl`
+   - `dist/hermes_cursor_harness-0.1.1.tar.gz`
+   - `dist/hermes_cursor_harness-0.1.1-py3-none-any.whl`
    - `~/.hermes/cursor_harness/compatibility_matrix.json`
    - a provider-route bundle from `hermes-cursor-harness provider-route bundle`
 

@@ -8,6 +8,7 @@ import time
 from pathlib import Path
 from typing import Any
 
+from .child_env import cursor_child_env
 from .config import HarnessConfig, resolve_stream_command
 from .config_validator import environment_matrix
 from .sdk_runner import sdk_status
@@ -83,7 +84,15 @@ def _matrix_path(cfg: HarnessConfig) -> Path:
 def _cursor_version(cfg: HarnessConfig) -> str:
     try:
         command = resolve_stream_command(cfg)
-        proc = subprocess.run(command + ["--version"], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10, check=False)
+        proc = subprocess.run(
+            command + ["--version"],
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=10,
+            check=False,
+            env=cursor_child_env(include_test_controls=True),
+        )
         return proc.stdout.strip() or proc.stderr.strip()
     except Exception as exc:
         return f"unknown: {exc}"

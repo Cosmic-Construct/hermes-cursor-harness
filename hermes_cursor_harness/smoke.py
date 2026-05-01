@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from .background import background_api_key
+from .child_env import cursor_child_env
 from .config import HarnessConfig, WRITEBACK_MCP_TOOLS, resolve_acp_command, resolve_sdk_command, resolve_stream_command
 from .harness import run_turn
 from .models import list_cursor_models
@@ -348,6 +349,7 @@ def _cursor_calls_mcp_check(checks: list[dict[str, Any]], *, cfg: HarnessConfig,
             stderr=subprocess.PIPE,
             timeout=timeout_sec or 120,
             check=False,
+            env=cursor_child_env(include_test_controls=True),
         )
         tool_seen = "hermes_cursor_" in proc.stdout
         token_seen = token in proc.stdout
