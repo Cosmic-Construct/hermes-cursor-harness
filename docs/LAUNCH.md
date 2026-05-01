@@ -127,7 +127,7 @@ everywhere, while Cursor owns the repo-local coding runtime it is great at.
 Looking for Hermes + Cursor users to test it, file issues, and help upstream
 native `cursor/*` routing into Hermes.
 
-Repo: <link>
+Repo: https://github.com/Cosmic-Construct/hermes-cursor-harness
 
 ## Short X Post Draft
 
@@ -139,4 +139,4 @@ Cursor handles repo-local coding turns through SDK/ACP/stream-json.
 Includes resumable sessions, live events, MCP backchannel, and a reviewable
 Cursor-to-Hermes proposal inbox.
 
-Testers wanted: <link>
+Testers wanted: https://github.com/Cosmic-Construct/hermes-cursor-harness
