@@ -62,6 +62,9 @@ jobs:
             --project "${{ inputs.project || '.' }}" \
             --no-sdk-status
 
+      - name: Install Cursor SDK bridge dependencies
+        run: hermes-cursor-harness sdk install --timeout-sec 180
+
       - name: Cursor SDK status
         run: hermes-cursor-harness sdk status
 
