@@ -26,6 +26,7 @@ jobs:
       CURSOR_BACKGROUND_API_KEY: ${{ secrets.CURSOR_API_KEY }}
       CURSOR_AGENT_INSTALL_COMMAND: ${{ secrets.CURSOR_AGENT_INSTALL_COMMAND }}
       HERMES_CURSOR_HARNESS_SDK_RUNTIME: local
+      HERMES_CURSOR_HARNESS_SDK_SANDBOX_ENABLED: "false"
 
     steps:
       - uses: actions/checkout@v4
